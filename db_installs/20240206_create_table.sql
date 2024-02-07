@@ -31,7 +31,7 @@ IF EXISTS
 CREATE TABLE
 IF NOT EXISTS category  (       categoryid      CHAR(2) NOT NULL,
                                 categoryname    VARCHAR (25) NOT NULL,
-                                                 PRIMARY KEY (categoryid)
+                                                PRIMARY KEY (categoryid)
 );
 SHOW CREATE TABLE category \G
 
@@ -40,13 +40,13 @@ IF EXISTS
 `product`;
 
 CREATE TABLE
-IF NOT EXISTS product (      productid       CHAR(3) NOT NULL,
+IF NOT EXISTS product (      productid     CHAR(3) NOT NULL,
                             productname    VARCHAR (25) NOT NULL,
                             productprice   NUMERIC (7,2) NOT NULL,
                             vendorid       CHAR (2) NOT NULL,
-                            category id    CHAR (2) NOT NULL,
-                                           PRIMARY KEY (product id),
-                                           FOREIGN KEY (vendor id)
+                            categoryid     CHAR (2) NOT NULL,
+                                           PRIMARY KEY (productid),
+                                           FOREIGN KEY (vendorid)
                                            REFERENCES vendor(vendorid),
                                            FOREIGN KEY (categoryid)
                                            REFERENCES category(categoryid)   );
@@ -70,7 +70,7 @@ IF EXISTS
 CREATE TABLE
 IF NOT EXISTS store (      storeid      VARCHAR(3) NOT NULL,
                           storezip    CHAR(5) NOT NULL,
-                          region id   CHAR NOT NULL,
+                          regionid    CHAR NOT NULL,
                                       PRIMARY KEY (storeid),
                                       FOREIGN KEY (regionid)
                                       REFERENCES region(regionid)
@@ -84,7 +84,7 @@ IF EXISTS
 
 CREATE TABLE
 IF NOT EXISTS customer   (      customerid      CHAR(7) NOT NULL,
-                                customer name   VARCHAR(15) NOT NULL,
+                                customername    VARCHAR(15) NOT NULL,
                                 customerzip     CHAR(5) NOT NULL,
                                                 PRIMARY KEY (customerid)
 );
@@ -98,16 +98,16 @@ IF NOT EXISTS salestransaction (   tid            VARCHAR(8) NOT NULL,
                                   customerid      CHAR(7) NOT NULL,
                                   storeid         VARCHAR(3) NOT NULL,
                                   tdate           DATE NOT NULL,
-                                                  PRIMARY KEY (tid)
+                                                  PRIMARY KEY (tid),
                                                   FOREIGN KEY (customerid)
-                                                  REFERENCES customer(customerid)
+                                                  REFERENCES customer(customerid),
                                                   FOREIGN KEY (storeid)
                                                   REFERENCES store (storeid)
 );
 SHOW CREATE TABLE salestransaction \G
 DROP TABLE
 IF EXISTS
-`soldivia`;
+`soldvia`;
 
 CREATE TABLE
 IF NOT EXISTS soldvia  (      productid    CHAR(3)  NOT NULL,
@@ -141,7 +141,7 @@ INSERT INTO region VALUES ('C','Chicagoland');
 INSERT INTO region VALUES ('T','Tristate');
 
 INSERT INTO store VALUES ('S1','60600','C');
-INSERT INTO store VALUES ('S1','60605','C');
+INSERT INTO store VALUES ('S2','60605','C');
 INSERT INTO store VALUES ('S3','35400','T');
 
 INSERT INTO customer VALUES ('1-2-333','Tina','60137');
