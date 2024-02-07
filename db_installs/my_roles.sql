@@ -6,7 +6,7 @@ IF EXISTS 'read_only_classicmodels_db'@'%';
 SELECT user, show_db_priv, account_locked
 FROM mysql.user;
 
--- CREATE ROLES
+-- CREATE ROLE
 CREATE ROLE
 IF NOT EXISTS
 'read_only_classicmodels_db', 'admin_user',
