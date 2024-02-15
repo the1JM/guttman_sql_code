@@ -15,6 +15,7 @@
 --
 -- Database Creation and Use:
 --
+-- 
 -- Drop Database
 DROP DATABASE IF EXISTS guttman_classdb_assign1;
 -- Create database
